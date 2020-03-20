@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
-import {ProductConsumer, ProductsConsumer} from '../Context';
+import {ProductsConsumer} from '../Context';
 export default class Product extends Component {
     render() {
         const {id,title,img,price,icCart} = this.props.product;

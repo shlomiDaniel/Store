@@ -8,14 +8,33 @@ const ProductsContext = React.createContext();
          products : [],
          detailProduct : detailProduct,
          cart:[],
-         modalOpen:true,
-         modalProduct:detailProduct
+         modalOpen:false,
+         modalProduct:detailProduct,
+         cartSubTotal : 0,
+         catTax : 0 ,
+         cartTotal : 0
+
 
      }
+
+     increment = (id)=>{
+      console.log("this is increment func");
+
+     }
+     decrement = (id)=>{
+        console.log("this is decrement func");
+  
+       }
+
+       clearCart = ()=>{
+        console.log("this is clearCart func");
+  
+       }
      handleDetail = (id)=>{
          const product = this.getItem(id);
          this.setState(()=>{
-             return {detailProduct:product}
+             return {detailProduct:product};
+           
          })
      }
 
@@ -57,6 +76,12 @@ this.setState(()=>{
         
     }
 
+    removeItem = (id)=>{
+
+     console.log("remove item");
+
+    }
+
     setProducts =()=> {
      
      let tempProducts = [];
@@ -88,7 +113,11 @@ this.setState(()=>{
                         handleDetail:this.handleDetail,
                         addToCart:this.addToCart,
                         openModal: this.openModal,
-                        closeModal:this.closeModal
+                        closeModal:this.closeModal,
+                        increment : this.increment,
+                        decrement : this.decrement,
+                        clearCart : this.clearCart,
+                        removeItem : this.removeItem
 
                     }
                 }>

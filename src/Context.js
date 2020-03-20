@@ -5,19 +5,80 @@ const ProductsContext = React.createContext();
 
  class ProductsProvider extends Component {
      state = {
-         products : storeProducts,
-         detailProduct : detailProduct
+         products : [],
+         detailProduct : detailProduct,
+         cart:[],
+         modalOpen:true,
+         modalProduct:detailProduct
 
      }
-     handleDetail = ()=>{
-         console.log("hello from detail");
+     handleDetail = (id)=>{
+         const product = this.getItem(id);
+         this.setState(()=>{
+             return {detailProduct:product}
+         })
      }
 
-     addToCart = ()=>{
-        console.log("hello from cart");
+     addToCart = (id)=>{
+        let tempProducts = [...this.state.products];
+        const index = tempProducts.indexOf(this.getItem(id));
+        const product = tempProducts[index];
+        product.inCart = true;
+        product.count = 1;
+        const price = product.price;
+        product.total = price;
+        this.setState(()=>{
+            return {products:tempProducts,cart:[...this.state.cart,product]};
+        },()=>{
+            console.log(this.state);
+        })
     }
 
 
+    openModal = id=>{
+        const product = this.getItem(id);
+        this.setState(()=>{
+            return {modalProduct:product,modalOpen:true}
+        })
+    }
+
+    closeModal =()=>{
+     
+this.setState(()=>{
+    return {modalOpen:false}
+})
+
+    }
+
+    getItem = (id)=>{
+    
+        const product = this.state.products.find(p=>p.id===id);
+        return product;
+        
+    }
+
+    setProducts =()=> {
+     
+     let tempProducts = [];
+     storeProducts.forEach(item=>{
+         //coping the values
+        const singleItem = {...item};
+        tempProducts = [...tempProducts,singleItem];
+
+     }) 
+     this.setState(()=>{
+       return {products:tempProducts};
+     })
+
+
+    }
+
+
+     
+
+    componentDidMount(){
+      this.setProducts();
+    }
     render() {
         return (
             <div>
@@ -25,7 +86,9 @@ const ProductsContext = React.createContext();
                     {
                         ...this.state,
                         handleDetail:this.handleDetail,
-                        addToCart:this.addToCart
+                        addToCart:this.addToCart,
+                        openModal: this.openModal,
+                        closeModal:this.closeModal
 
                     }
                 }>

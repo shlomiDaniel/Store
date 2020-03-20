@@ -8,6 +8,7 @@ import Default from './components/Details';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import {Switch,Route} from 'react-router-dom';
+import Modal from './components/Modal';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
        <Route path="/cart" component={Cart}></Route>
        <Route  component={Default}></Route>
       </Switch>
-      
+      <Modal/>
      </React.Fragment>
     
   );

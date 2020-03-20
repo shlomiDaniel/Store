@@ -22,9 +22,10 @@ export default class Cart extends Component {
                             );
                             
                         }else{
+                            console.log("adad");
                              return (
                                 <EmptyCart  />
-
+                               
                              )
                             
                         }

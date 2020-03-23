@@ -49,7 +49,7 @@ const ProductsContext = React.createContext();
         this.setState(()=>{
             return {products:tempProducts,cart:[...this.state.cart,product]};
         },()=>{
-            console.log(this.state);
+            //console.log(this.state);
         })
     }
 
